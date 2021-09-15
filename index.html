@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- ADD THE META DATA -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Word Counter</title>
+  <!-- ADD THE CSS STYLES -->
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      background-color: #45485a;
+    }
+    .container {
+      margin: 70px auto;
+      max-width: 600px;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #eee;
+    }
+    .result {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      padding: 20px 60px;
+      margin-bottom: 10px;
+      font-size: 1.5rem;
+      background-color: #90caf9;
+      color: #3f51b5;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+    .text-area {
+      width: 100%;
+      height: 300px;
+      outline: none;
+      border: 1px solid #ccc;
+      padding: 20px;
+      font-size: 1.5rem;
+      background-color: #eee;
+      border-radius: 6px;
+    }
+    .words-count {
+      color: #c62828;
+    }
+    .chars-count {
+      color: #5d4037;
+    }
+  </style>
+</head>
+<!-- THE BODY OF APP -->
+<body>
+  <div class="container">
+    <h1>Word Counter</h1>
+    <div class="result">
+      <div>Words: <span class="words-count">0</span>
+      </div>
+      <div>Characters: <span class="chars-count">0</span>
+      </div>
+    </div>
+    <textarea class="text-area" placeholder="Type or paste your text here..."></textarea>
+  </div>
+  
+  <!-- ADD THE SCRIPT CODE -->
+  <script>
+    const textarea = document.querySelector('.text-area');
+    const wordsCount = document.querySelector('.words-count');
+    const charsCount = document.querySelector('.chars-count');
+    
+    
+    //FUNCTION TO COUNT NUMBER OF WORDS AND CHARACTERS IN TEXTAREA
+    textarea.addEventListener('keyup', function(e){
+      //COUNT NUMBER OF CHARACTERS IN TEXTAREA
+      charsCount.textContent = (e.target.value.length);
+    
+      //COUNT NUMBER OF WORDS IN TEXTAREA
+        //use replace() method and regex to replace specific characters 
+        //with space to consider the word after it as a new word
+        const text = e.target.value.replace(/[\t\n\r\.\?\!]/gm, ' ');
+    
+        //use split() method to split up the text to words
+        const words = text.split(' ');
+    
+        //display the number of wordsof the array words
+        //(we use filter to eliminate the empty values in the array to prevent counting it as a word)
+        wordsCount.textContent = words.filter(word => word !== '').length;
+    });
+  </script>
+</body>
+</html>
